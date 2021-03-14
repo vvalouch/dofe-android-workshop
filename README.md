@@ -38,6 +38,11 @@ Sample body of the post
 - do not forget to `Sync Project` after adding new dependencies
 
 ### Setup networking part
+0. Add INTERNET permission to AndroidManifest.xml
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+
 1. create class `Grade` in the package `com.concur.dofeworkshop.model`
 ```kotlin
 package com.concur.dofeworkshop.model

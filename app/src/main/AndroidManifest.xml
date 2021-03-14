@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.concur.dofeworkshop">
     
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- add INTERNET permission here -->
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
