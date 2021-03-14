@@ -1,6 +1,6 @@
 package com.concur.dofeworkshop.model
 
-data class GradeDTO(
+data class Grade(
     val subject: String = "",
     val grade: String = ""
 )

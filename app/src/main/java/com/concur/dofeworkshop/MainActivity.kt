@@ -1,20 +1,30 @@
 package com.concur.dofeworkshop
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.concur.dofeworkshop.network.NetworkClient
-import kotlin.concurrent.thread
+import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.concur.dofeworkshop.model.Grade
 
 class MainActivity : AppCompatActivity() {
+    private val model: GradeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        thread(start = true){
-            val networkClient = NetworkClient()
-            print(networkClient.getGrades())
-
-            print(networkClient.postGrade("Mathematics", "A"))
+        val gradeListObserver = Observer<List<Grade>>{
+            //adapter.update(it)
+            Log.d(TAG, "Some update happened.")
         }
+        model.gradeList.observe(this, gradeListObserver)
+
+        model.getAll()
+        model.postNew("Mathematics", "B")
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

@@ -40,6 +40,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
+    //helps with LiveData & coroutines dependecies
+    implementation "androidx.fragment:fragment-ktx:1.3.1"
+
     //Retrofit setup
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

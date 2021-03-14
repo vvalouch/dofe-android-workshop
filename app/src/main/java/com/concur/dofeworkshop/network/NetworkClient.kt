@@ -1,48 +1,47 @@
 package com.concur.dofeworkshop.network
 
 import android.util.Log
-import com.concur.dofeworkshop.model.GradeDTO
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import com.concur.dofeworkshop.model.Grade
 import retrofit2.Retrofit
+import retrofit2.await
+import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.Exception
 
 
 class NetworkClient {
     private val TAG = "NetworkClient"
     private val API_URL = "https://private-9937d4-dofeandroidworkshop.apiary-mock.com/"
 
-    private fun getClient(): GradeSystem {
+    private fun prepareService(): GradeSystem {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(API_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(OkHttpClient
-                .Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
-                .build())
             .build()
         return retrofit.create(GradeSystem::class.java)
     }
 
-
-    fun getGrades(): List<GradeDTO> {
+    suspend fun getGrades(): List<Grade> {
+        var result = emptyList<Grade>()
         try {
-            val response = getClient().getGrades().execute()
+            val response = prepareService().getGrades().awaitResponse()
             if (response.isSuccessful) {
-                return response.body()!!
+                result = response.body()!!
+            } else {
+                Log.w(TAG, "Something went wrong. Response code: ${response.code()}")
             }
         } catch (ex: Exception) {
             Log.e(TAG, "Something failed.", ex)
         }
-        return emptyList()
+        return result
     }
 
-    fun postGrade(subject: String, grade: String) {
-        try {
-            getClient().postGrade(GradeDTO(subject, grade)).execute()
+    suspend fun postGrade(subject: String, grade: String): Boolean {
+        return try {
+            val response = prepareService().postGrade(Grade(subject, grade)).awaitResponse()
+            response.isSuccessful
         } catch (ex: Exception) {
             Log.e(TAG, "Something failed.", ex)
+            false
         }
     }
 }
