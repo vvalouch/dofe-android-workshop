@@ -23,7 +23,8 @@ Sample body of the post
 
 
 ## Tasks
-### Setup needed for calling plain old HTTP (This is not needed in case of HTTPS) 
+### Android Manifest Setup
+#### Needed to allow unsecure HTTP (please skip if you are using HTTPS) 
 1. Create 'xml' folder under resources
 2. Create file `network_security_config.xml` with following config
 ```xml
@@ -36,6 +37,10 @@ Sample body of the post
 ```xml
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
+```
+#### Add INTERNET permission to AndroidManifest.xml
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
 ```
 
 ### Add Retrofit & Gson dependency
@@ -53,11 +58,6 @@ Sample body of the post
 - do not forget to `Sync Project` after adding new dependencies
 
 ### Setup networking part
-0. Add INTERNET permission to AndroidManifest.xml
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-```
-
 1. create class `Grade` in the package `com.concur.dofeworkshop.model`
 ```kotlin
 package com.concur.dofeworkshop.model
