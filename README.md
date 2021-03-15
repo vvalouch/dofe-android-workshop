@@ -35,7 +35,7 @@ Sample body of the post
 3. Add following config to AndroidManifest to application declaration
 ```xml
         android:usesCleartextTraffic="true"
-        android:networkSecurityConfig="@xml/network_security_config.xml"
+        android:networkSecurityConfig="@xml/network_security_config"
 ```
 
 ### Add Retrofit & Gson dependency
