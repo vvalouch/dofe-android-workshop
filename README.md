@@ -1,7 +1,8 @@
 # DofE Android Mini-Workshop
 
 ## Goal
-The goal is to build a simple Android App which uses the API build during the session
+The goal is to build a simple Android App which uses the API build during the session. Final version of code is available in branch `mvvm_and_network_done`
+
 
 ## The API
 The app can be tested against mock server: 
